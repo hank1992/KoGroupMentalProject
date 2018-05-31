@@ -817,8 +817,11 @@ function writeDB() {
   }
   
   //---Connect Azure SQL
-  var conn = Jdbc.getConnection("jdbc:sqlserver://UserName.database.windows.net:1433;databaseName=UserName", "UserName", "Password");
-  var insertTableSQL1 = "INSERT INTO Table (ChartNo, ID, DiagnosedYear) VALUES (?,?,?)"; 
+  var dbName="yourDBaddress";
+  var username="yourUsername";
+  var password="yourPassword";
+  var conn = Jdbc.getConnection(dbName, username, password);
+  var insertTableSQL1 = "INSERT INTO Mental_Patient (ChartNo, ID, DiagnosedYear) VALUES (?,?,?)"; 
   var stmt1 = conn.prepareStatement(insertTableSQL1);
   stmt1.setString(1, chartNo);
   stmt1.setString(2, id);
@@ -827,7 +830,6 @@ function writeDB() {
   stmt1.execute();
   }catch(e){
     Logger.log("stmt1: "+chartNo+" "+e.message);
-    MailApp.sendEmail("Email", "Mental Exception Report-Patient", "Message: " + e.message + "\nFile: " + e.fileName + "\nLine: " + e.lineNumber);
   }
     
     var insertTableSQL2 = "INSERT INTO "+ timePoint +"(Timestamp, ChartNo, Height, Weight, Remark, LatestCD4Date, LatestCD4Count, LatestVLDate, LatestVLCount, Occupation, KnownStatus, PsychyOPD, PsychyOPDReason, DiagnosedPsy, DiagnosedPsyType, RegularFUPsy, PTEmail, CESD1, CESD2, CESD3, CESD4, CESD5, CESD6, CESD7, CESD8, CESD9, CESD10, PSQI, DUDITEd1,DUDITEd2,DUDITEd3,DUDITEd4,DUDITEd5,DUDITEd6,DUDITEd7,DUDITEd8,DUDITEd9,DUDITEd10,DUDITEd11,DUDITEd12,DUDITEd13, DUDITEp1,DUDITEp2,DUDITEp3,DUDITEp4,DUDITEp5,DUDITEp6,DUDITEp7,DUDITEp8,DUDITEp9,DUDITEp10,DUDITEp11,DUDITEp12,DUDITEp13,DUDITEp14,DUDITEp15,DUDITEp16,DUDITEp17, DUDITEn1,DUDITEn2,DUDITEn3,DUDITEn4,DUDITEn5,DUDITEn6,DUDITEn7,DUDITEn8,DUDITEn9,DUDITEn10,DUDITEn11,DUDITEn12,DUDITEn13,DUDITEn14,DUDITEn15,DUDITEn16,DUDITEn17, DUDITEt1, DUDITEt2, DUDITEt3, DUDITEt4, DUDITEt5, DUDITEt6, DUDITEt7, DUDITEt8, DUDITEt9,DUDITEt10) VALUES (?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?)"; 
@@ -924,20 +926,20 @@ function writeDB() {
     try{
       stmt2.execute();
     }catch(e){
-      MailApp.sendEmail("Email", "Mental Exception Report-"+ timePoint, "Message: " + chartNo+ " "+e.message + "\nFile: " + e.fileName + "\nLine: " + e.lineNumber);
+      MailApp.sendEmail("hank1992@gmail.com", "Mental Exception Report-"+ timePoint, "Message: " + chartNo+ " "+e.message + "\nFile: " + e.fileName + "\nLine: " + e.lineNumber);
       Logger.log("stmt2: "+chartNo+" "+e.message);
     }
   
   
   timePoint=timePoint.substring(7);
   var insertTableSQL3 = 
-  "UPDATE TableName SET TableName.Column FROM TableName INNER JOIN TableName ON TableName.chartNo = TableName.chartNo\;"; 
+  "UPDATE dbo.Mental_Patient SET dbo.Mental_Patient."+timePoint+"Date=Mental_"+timePoint+".Timestamp FROM dbo.Mental_Patient INNER JOIN dbo.Mental_"+timePoint+" ON dbo.Mental_Patient.chartNo = dbo.Mental_"+timePoint+".chartNo\;"; 
   var stmt3 = conn.prepareStatement(insertTableSQL3);
   
   try{
       stmt3.execute();
     }catch(e){
-      MailApp.sendEmail("Email", "Mental Exception Report-"+ timePoint, "Message: " + chartNo+ " "+e.message + "\nFile: " + e.fileName + "\nLine: " + e.lineNumber);
+      MailApp.sendEmail("hank1992@gmail.com", "Mental Exception Report-"+ timePoint, "Message: " + chartNo+ " "+e.message + "\nFile: " + e.fileName + "\nLine: " + e.lineNumber);
       Logger.log("stmt3: "+chartNo+" "+e.message);
     }
   
