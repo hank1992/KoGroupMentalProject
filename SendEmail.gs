@@ -17,8 +17,20 @@ function SendEmails() {
   range=sheet.getRange(lastRow,5);
   var cm=range.getValue();
     switch (cm){
-      case "Name":
-        cm="Email";
+      case "白芸慧":
+        cm="yhpai623@gmail.com";
+        break;
+      case "賴怡因":
+        cm="yiin509@gmail.com";
+        break;
+      case "劉曉穎":
+        cm="n038915@gmail.com";
+        break;
+      case "邱培仁":
+        cm="d716gary@gmail.com";
+        break;
+      case "唐于雯":
+        cm="winn618@gmail.com";
         break;
   }
   
@@ -991,7 +1003,8 @@ function SendEmails() {
     var recipientCM=cm;
     var subjectCM =timestamp + "身心計畫轉介評估問卷回饋"+ chartNo;
     messageCM +="感謝您耐心填寫問卷，針對您填寫之內容分析如下~\n☆☆憂鬱量表(CES-D)："+cesdSUM+"分\n說明：總得分10分以上者，表示有憂鬱傾向，建議轉介身心科評估治療。\n☆☆睡眠品質量表(PSQI)："+psqi+"分\n說明:總得分範圍 0-21分，分數越高代表睡眠品質越不佳。\n☆☆成癮行為嚴重度量表(DUDITE)：\nDrug使用頻率如下\n"+"1. 大麻: "+d1+"\n2. 安非他命: "+d2+"\n3. 古柯鹼: "+d3+"\n4. 海洛因: "+d4+"\n5. K他命: "+d5+"\n6. 搖頭丸: "+d6+"\n7. 其他幻覺劑: "+d7+"\n8. 揮發劑或稀釋劑: "+d8+"\n9. GHB (G水) 或其他藥物: "+d9+"\n10. 安眠藥/鎮靜劑: "+d10+"\n11. 止痛劑: "+d11+"\n12. 酒: "+d12+"\n13. 香菸、雪茄: "+d13+"\n說明: 0分: 未曾使用, 1分: 試過1次或以上, 2分: 每月1次或更少, 3分: 每月2-4次, 4分: 每週2-3次, 5分: 每週4次或以上\n成大醫院 愛管閒事 關心您\n";
-    MailApp.sendEmail(cm+", Email, Email2", subjectCM, messageCM);
+    MailApp.sendEmail(cm+", helperhiv@gmail.com, naiyingko@gmail.com", subjectCM, messageCM);
+    //MailApp.sendEmail("hank1992@gmail.com", subjectCM, messageCM);
     
     //Write Email to Patient
     range=sheet.getRange(lastRow,23);
@@ -1009,12 +1022,12 @@ function SendEmails() {
     if(recipientPT.equals("")!=true){
       var subjectPT="問卷自動回饋";
       messagePT="٩(●ᴗ●)۶ 太棒了!!您看起來無情緒及睡眠困擾\n感謝您耐心填寫問卷，針對您填寫之內容分析如下~\n☆☆憂鬱量表(CES-D)："+cesdSUM+"分\n說明：總得分10分以上者，表示有憂鬱傾向，建議轉介身心科評估治療。\n☆☆睡眠品質量表(PSQI)："+psqi+"分\n說明:總得分範圍 0-21分，分數越高代表睡眠品質越不佳。\n成大醫院 愛管閒事 關心您"
-      MailApp.sendEmail(recipientPT+", Email, Email2", subjectPT, messagePT);
+      MailApp.sendEmail(recipientPT+", helperhiv@gmail.com, naiyingko@gmail.com", subjectPT, messagePT);
     }else{
       //Write Email to Assistant  
       var subjectPT="問卷自動回饋";
       messagePT="٩(●ᴗ●)۶ 太棒了!!您看起來無情緒及睡眠困擾\n感謝您耐心填寫問卷，針對您填寫之內容分析如下~\n☆☆憂鬱量表(CES-D)："+cesdSUM+"分\n說明：總得分10分以上者，表示有憂鬱傾向，建議轉介身心科評估治療。\n☆☆睡眠品質量表(PSQI)："+psqi+"分\n說明:總得分範圍 0-21分，分數越高代表睡眠品質越不佳。\n成大醫院 愛管閒事 關心您"
-      MailApp.sendEmail("Email, Email2", subjectPT, messagePT);
+      MailApp.sendEmail("helperhiv@gmail.com, naiyingko@gmail.com", subjectPT, messagePT);
     }
   }
 }
